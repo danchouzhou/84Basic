@@ -1,0 +1,26 @@
+Input "N=",N                        " get input N, M
+Input "M=",M                        " note that bitstream stored in decimal
+int(N/M)→Q                          " calculate Q
+N-QM→R                              " calculate R
+If R≥2^-int(-logBASE(M,2))-M        
+Then                                " roundup: -int(-x), e.g. -int(-3.5)=4
+R+2^-int(-logBASE(M,2))-M→R         
+-int(-logBASE(M,2))→L               " determin bit length for R
+Else
+int(logBASE(M,2))→L
+End
+"(Q,R)=("+toString(Q)+","→Str1      " print (Q,R)=(Q,R)
+Str1+toString(R)+")"→Str1
+Disp Str1
+"C="→Str1
+For(I,1,Q)                          " Q part of codeword
+Str1+"1"→Str1
+End
+Str1+"0 "→Str1
+" "→Str2
+For(I,1,L)                          " R part of codeword
+toString(R-int(R/2)*2)+Str2→Str2    " Str2 = toString(R%2) + Str2
+int(R/2)→R                          " R = R / 2
+End
+Str1+Str2→Str1                      " combine Q R codeword
+Disp Str1                           " print codeword

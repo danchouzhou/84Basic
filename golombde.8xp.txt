@@ -1,0 +1,27 @@
+Input "M=",M                                " get input m and bitstream
+Input "B=",B
+int(log(B+1))+1→L                           " get bitstream length
+DelVar QDelVar R
+For(I,1,L)
+Q+int(B/10^(L-I))-int(B/10^(L-I)/2)*2→Q     " Q = Q + (B/10^(L-I) % 2)
+If int(B/10^(L-I))-int(B/10^(L-I)/2)*2=0    " end of Q
+Then
+For(J,1,-int(-logBASE(M,2)))                " read maximum possible bits for R
+I+1→I                                       " increase bitstream index
+R*2→R                                       " left shift R
+R+int(B/10^(L-I))-int(B/10^(L-I)/2)*2→R     " R = R + (B/10^(L-I) % 2)
+End
+If int(R/2)<2^-int(-logBASE(M,2))-M         " if first few bits is below boundary
+Then
+int(R/2)→R                                  " read just first few bits
+I-1→I                                       " decrease bitstream index
+End
+"(Q,R)=("+toString(Q)+","→Str1              " add (Q,R) sequence to Str1
+Str1+toString(R)+") N="→Str1
+If R≥2^-int(-logBASE(M,2))-M                " reconstruct R if above boundary
+R-(2^-int(-logBASE(M,2))-M)→R
+Str1+toString(QM+R)→Str1                    " add N to Str1
+Disp Str1                                   " print result
+DelVar QDelVar R                            " clear Q and R for following bitstream
+End
+End
