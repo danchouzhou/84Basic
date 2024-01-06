@@ -1,0 +1,45 @@
+0.5+(rand*0.5)→X
+0.0→Y
+0.0→Z
+
+0.03→T
+999→dim(L₁)
+999→dim(L₂)
+X→L₁(1)
+Y→L₂(1)
+
+ClrDraw
+DispGraph
+-2.5→Xmin
+2.5→Xmax
+1→Xscl
+-1→Ymin
+1→Ymax
+1→Yscl
+
+2→I
+14→C
+While 1
+-0.714*X+0.5*(-1.143+0.714)*(abs(X+1)-abs(X-1))→H
+T*(15.6*(Y-X-H))+X→X
+T*(X-Y+Z)+Y→Y
+T*(-28*Y)+Z→Z
+If I<1000
+Then
+X→L₁(I)
+Y→L₂(I)
+Line(L₁(I-1),L₂(I-1),L₁(I),L₂(I),C)
+I+1→I
+Else
+If C=14
+Then
+15→C
+Else
+14→C
+End
+X→L₁(1)
+Y→L₂(1)
+Line(L₁(999),L₂(999),L₁(1),L₂(1),C)
+2→I
+End
+End
