@@ -1,0 +1,20 @@
+0→Xmin
+50→Xmax
+10→Xscl
+­-2→Ymin
+2→Ymax
+1→Yscl
+Input "Span=",S
+Input "Iteration=",I
+ClrDraw
+DispGraph
+0→A
+For(N,1,I)
+S*rand→T
+sin(T)→V
+A+abs(V)→A
+A/N→M
+Pt-On(T,V)
+Text(10,20,"Pi=",2/M)
+Text(10,150,"N=",N)
+End
